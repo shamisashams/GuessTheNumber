@@ -1,4 +1,3 @@
-
 import random
 
 
@@ -6,16 +5,20 @@ import random
 def guess_my_number():
 
     # pick a random number between 1 and 100 and store in a variable
-    random_number = random.randint(1,100)
+    random_number = random.randint(1, 100)
 
     # initialize some variables
     guess_count = 0
     max_guesses = 5
     hint = 0
+    guesses = []  # List to store the guesses
+
+    # clear previously stored guesses
+    open("guesses.txt", "w").close()
 
     # read and print the text from a text file
-    with open('text.txt', 'r') as my_file:
-        print(my_file.read())
+    with open('greetings.txt', 'r') as greeting_text:
+        print(greeting_text.read())
 
     # make sure the number of guesses are less than the max number allowed
     while guess_count < max_guesses:
@@ -26,6 +29,9 @@ def guess_my_number():
         except ValueError:
             print('Please enter a valid number')
             continue
+
+        # Store the guess in the list
+        guesses.append(user_guess)
 
         # increase the number of guesses by 1
         guess_count += 1
@@ -64,10 +70,19 @@ def guess_my_number():
 
         # is the remaining guesses are 1 or more, show the user how many guesses they have left
         if remaining_guesses > 0:
-            print(f'You have {max_guesses - guess_count} guesses left.')
+            print(f'You have {remaining_guesses} guesses left.')
         else:
             # else, if the number of remaining guesses is 0, let the user know they're out of guesses and they've lost
             print(f'Sorry. You are out of guesses. The number was {random_number}')
+
+    # Save the guesses to a file
+    with open('guesses.txt', 'a') as guess_storage:
+        guess_storage.write('The guesses you made were: ' + ', '.join(map(str, guesses)) + '\n')
+
+    # Print the guesses at the end of the game
+    with open('guesses.txt', 'r') as guess_storage:
+        print(guess_storage.read())
+
 
 # while True keeps running this code until it's asked to stop
 while True:
@@ -77,7 +92,7 @@ while True:
     # also, set that to lower case to get rid of case sensitivity
     restart = input('Would you like to play again? (yes/no)').lower()
 
-    # based on of they say 'yes' or 'no', continue or break the loop
+    # based on if they say 'yes' or 'no', continue or break the loop
     if restart in ['yes', 'y']:
         continue
     elif restart in ['no', 'n']:
@@ -86,4 +101,3 @@ while True:
         # if the user's input is neither 'yes' nor 'no', ask them to enter a valid input
         print('Please enter yes or no.')
         restart = input('Would you like to play again? (yes/no)').lower()
-
