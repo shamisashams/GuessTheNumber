@@ -92,12 +92,14 @@ while True:
     # also, set that to lower case to get rid of case sensitivity
     restart = input('Would you like to play again? (yes/no)').lower()
 
+    # loop until the user provides a valid input
+    while restart not in ['yes', 'y', 'no', 'n']:
+        # if the user's input is neither 'yes' nor 'no', ask them to enter a valid input
+        print('Please enter yes or no.')
+        restart = input('Would you like to play again? (yes/no)').lower()
+
     # based on if they say 'yes' or 'no', continue or break the loop
     if restart in ['yes', 'y']:
         continue
     elif restart in ['no', 'n']:
         break
-    else:
-        # if the user's input is neither 'yes' nor 'no', ask them to enter a valid input
-        print('Please enter yes or no.')
-        restart = input('Would you like to play again? (yes/no)').lower()
