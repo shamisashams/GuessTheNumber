@@ -44,8 +44,7 @@ def guess_my_number():
         # if the user's guess is greater than the random number let them know their guess was too high
         elif user_guess > random_number:
 
-            # if the user's guess is within 5 numbers let them know their close and narrow it down for them
-            # also make sure the number of hints is 0, otherwise do not show hint
+            # if the user's guess is within 5 numbers let them know their close
             if user_guess - random_number < 5 and hint == 0:
                 print(f'You are close! The number is between {user_guess - 5} and {user_guess}')
                 # add 1 to the hint so this code will not run again
@@ -56,8 +55,7 @@ def guess_my_number():
         # if the user's guess is less than the random number let them know their guess was too low
         elif user_guess < random_number:
 
-            # if the user's guess is within 5 numbers let them know their close and narrow it down for them
-            # also make sure the number of hints is 0, otherwise do not show hint
+            # if the user's guess is within 5 numbers let them know their close
             if random_number - user_guess < 5 and hint == 0:
                 print(f'You are close! The number is between {user_guess} and {user_guess + 5}')
                 # add 1 to the hint so this code will not run again
@@ -72,7 +70,7 @@ def guess_my_number():
         if remaining_guesses > 0:
             print(f'You have {remaining_guesses} guesses left.')
         else:
-            # else, if the number of remaining guesses is 0, let the user know they're out of guesses and they've lost
+            # else, if the number of remaining guesses is 0, let the user know they're out of guesses
             print(f'Sorry. You are out of guesses. The number was {random_number}')
 
     # Save the guesses to a file
@@ -89,7 +87,6 @@ while True:
     # call the function to run the game
     guess_my_number()
     # ask the user if they want to play again and store their input in a variable
-    # also, set that to lower case to get rid of case sensitivity
     restart = input('Would you like to play again? (yes/no)').lower()
 
     # loop until the user provides a valid input
